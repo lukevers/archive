@@ -15,13 +15,6 @@ type Mailbox struct {
 	Emails []*Email
 }
 
-type Email struct {
-	Next *Email
-	Prev *Email
-
-	Message *eml.Message
-}
-
 func NewMailbox(m *Mailbox) *Mailbox {
 	m.index()
 	go m.watch()
