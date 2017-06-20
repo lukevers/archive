@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -75,8 +76,6 @@ func (m *Mailbox) index() error {
 			return err
 		}
 
-		// ...
-
 		email := &Email{Message: &message}
 		m.Emails = append(m.Emails, email)
 		emails[message.MessageId] = email
@@ -87,6 +86,11 @@ func (m *Mailbox) index() error {
 	if err != nil {
 		return err
 	}
+
+	// Sort the slice of emails by date
+	sort.Slice(m.Emails, func(i, j int) bool {
+		return m.Emails[i].Message.Date.After(m.Emails[j].Message.Date)
+	})
 
 	for _, email := range m.Emails {
 		// Loop over each reply that this email has and link it to the previous

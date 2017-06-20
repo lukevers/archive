@@ -9,7 +9,7 @@
             {{ range .Emails }}
                 {{ if not .Message.InReply }}
                     <li>
-                        <a href="/email/{{ .Message.MessageId }}">{{ .Message.Subject }}</a>
+                        {{ .Message.Date }} &mdash; <a href="/email/{{ .Message.MessageId }}">{{ .Message.Subject }}</a>
                     </li>
                 {{ end }}
             {{ end }}
