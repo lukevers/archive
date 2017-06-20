@@ -1,0 +1,31 @@
+{{ define "single" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Archive | {{ .Message.HeaderInfo.Subject }}</title>
+    </head>
+    <body>
+        <h1>{{ .Message.HeaderInfo.Subject }}</h1>
+        <p>
+            {{ .Message.HeaderInfo.From }}
+            <br/>{{ .Message.HeaderInfo.Date }}
+        </p>
+        <hr>
+        <p>
+            <pre>{{ .Message.Text }}</pre>
+        </p>
+        <hr>
+        <ul>
+            {{ if .Prev }}
+                <li><a href="/email/{{ .Prev.Message.MessageId }}">Previous message</a></li>
+            {{ end }}
+
+            {{ if .Next }}
+                <li><a href="/email/{{ .Next.Message.MessageId }}">Next message</a></li>
+            {{ end }}
+
+            <li><a href="/">Home</a></li>
+        </ul>
+    </body>
+</html>
+{{ end }}

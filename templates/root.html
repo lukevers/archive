@@ -1,0 +1,19 @@
+{{ define "root" }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Archive</title>
+    </head>
+    <body>
+        <ul>
+            {{ range .Emails }}
+                {{ if not .Message.InReply }}
+                    <li>
+                        <a href="/email/{{ .Message.MessageId }}">{{ .Message.Subject }}</a>
+                    </li>
+                {{ end }}
+            {{ end }}
+        </ul>
+    </body>
+</html>
+{{ end }}
