@@ -3,17 +3,26 @@
 <html>
     <head>
         <title>Archive</title>
+        <style>.hidden { display: none; }</style>
     </head>
     <body>
         <ul>
+            <li onclick="toggleReplies();">Toggle Replies</li>
+        </ul>
+        <ul>
             {{ range .Emails }}
-                {{ if not .Message.InReply }}
-                    <li>
-                        {{ .Message.Date }} &mdash; <a href="/email/{{ .Message.MessageId }}">{{ .Message.Subject }}</a>
-                    </li>
-                {{ end }}
+            <li class="{{ if .Message.InReply }}reply hidden{{end}}">
+                    {{ .Message.Date }} &mdash; <a href="/email/{{ .Message.MessageId }}">{{ .Message.Subject }}</a>
+                </li>
             {{ end }}
         </ul>
+        <script>
+            function toggleReplies() {
+                [].slice.call(document.getElementsByClassName('reply')).map(function(el) {
+                    el.classList.toggle('hidden');
+                });
+            }
+        </script>
     </body>
 </html>
 {{ end }}
