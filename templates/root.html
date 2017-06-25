@@ -3,11 +3,11 @@
 <html>
     <head>
         <title>Archive</title>
-        <style>.hidden { display: none; }</style>
+        <link rel="stylesheet" href="/css/archive.css">
     </head>
     <body>
         <ul>
-            <li onclick="toggleReplies();">Toggle Replies</li>
+            <li onclick="toggle('reply', 'hidden');">Toggle Replies</li>
         </ul>
         <ul>
             {{ range .Emails }}
@@ -16,13 +16,7 @@
                 </li>
             {{ end }}
         </ul>
-        <script>
-            function toggleReplies() {
-                [].slice.call(document.getElementsByClassName('reply')).map(function(el) {
-                    el.classList.toggle('hidden');
-                });
-            }
-        </script>
+        <script type="text/javascript" src="/js/archive.js" async></script>
     </body>
 </html>
 {{ end }}
