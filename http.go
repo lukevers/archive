@@ -17,7 +17,7 @@ func route() {
 	r.Use(middleware.Recoverer)
 
 	r.Get("/", root)
-	r.Get("/email/:id", single)
+	r.Get("/email/*", single)
 
 	var err error
 	templates, err = template.ParseGlob("templates/*.html")
@@ -34,7 +34,7 @@ func root(w http.ResponseWriter, r *http.Request) {
 }
 
 func single(w http.ResponseWriter, r *http.Request) {
-	id := chi.URLParam(r, "id")
+	id := chi.URLParam(r, "*")
 	var email *Email
 
 	for _, e := range MB.Emails {
